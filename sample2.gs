@@ -1,6 +1,6 @@
 async function sample2() {
   const apiKey = "AIzaSyARMQR87p3EFawi4T5M6IfGS9O5hgCCD-c"; // Please set your API key.
-  const fileId = "1l06UvaumINfdPzpjPQZuIZLx0RA_WjSB"; // File ID of PDF file of invoice file.
+  const fileId = "1ln1Tw_ywIk1XkcA88Zt_Nn8MiVYHbpiM"; // File ID of PDF file of invoice file.
 
   // Parsing invoice of PDF file and retrieve values.
   const ip = new InvoiceApp({
