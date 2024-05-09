@@ -34,28 +34,30 @@ class InvoiceApp {
     const obj = await this.uploadFileByBlob_(blob);
 
     console.log(`--- Processing Gemini using the uploaded images.`);
-    const q = [
-      `Create a table from the given image of the invoice as a JSON object.`,
-      `The giving image is the invoice.`,
-      `Return a created table as a JSON object.`,
-      `No descriptions and explanations. Return only raw JSON object without markdown. No markdown format.`,
-      `The required properties in JSON object are as follows.`,
+  
+  const q = [
+      `Создаем таблицу на основе заданного изображения счета-фактуры в виде объекта JSON.`,
+      `Задающим изображением является счет-фактура.`,
+      `Возвращаем созданную таблицу в виде объекта JSON.`,
+      `Без описаний и пояснений. Возвращаем только необработанный объект JSON без уценки. Нет формата уценки.`,
+      `Требуемые свойства в JSON-объекте следующие.`,
       ``,
-      `[Properties in JSON object]`,
-      `"invoiceTitle": "title of invoice"`,
-      `"invoiceDate": "date of invoice"`,
-      `"invoiceNumber": "number of the invoice"`,
-      `"invoiceDestinationName": "Name of destination of invoice"`,
-      `"invoiceDestinationAddress": "address of the destination of invoice"`,
-      `"totalCost": "total cost of all costs"`,
-      `"table": "Table of invoice. This is a 2-dimensional array. Add the first header row to the table in the 2-dimensional array."`,
+      `[Свойства в JSON-объекте]`,
+      `"СчетаНазвание": "название счета-фактуры"`,
+      `"СчетДата": "дата выставления счета"`,
+      `"СчетНомер": "номер счета-фактуры"`,
+      `"СчетНазваниеПолучателя": "Название получателя счета-фактуры"`,
+      `"СчетАдресПолучателя": "адрес назначения счета-фактуры"`,
+      `"общаяСумма": "общая стоимость всех затрат"`,
+      `"таблица": "Таблица счета-фактуры". Это двумерный массив. Добавьте первую строку заголовка в таблицу в 2-мерном массиве."`,
       ``,
-      `[Format of 2-dimensional array of "table"]`,
-      `"title or description of item", "number of items", "unit cost", "total cost"`,
+      `[Формат 2-мерного массива "таблица"]`,
+      `"название или описание товара", "количество товаров", "стоимость единицы", "общая стоимость"`,
       ``,
-      `If the requirement information is not found, set "no value".`,
-      `Return only raw JSON object without markdown. No markdown format. No markcodn tags.`,
+      `Если информация о требовании не найдена, установите "нет значения".`,
+      `Возвращает только необработанный объект JSON без уценки. Нет формата markdown. Нет тегов markcodn.`,
     ].join("\n");
+
     const res = this.doGemini_({ q, obj });
 
     console.log(`--- Deleting the uploaded images from Gemini.`);
